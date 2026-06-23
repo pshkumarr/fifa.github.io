@@ -125,7 +125,7 @@
       if (chatOpenLogged || typeof sendDMPEvents !== "function") return;
       chatOpenLogged = true;
       ensureChatStart();
-      sendDMPEvents("questions", HOME_WELCOME_MESSAGE);
+      sendDMPEvents("ques", HOME_WELCOME_MESSAGE);
     }
 
     function ensureChatStart() {
