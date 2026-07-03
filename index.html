@@ -115,17 +115,12 @@
     resetInactivityTimer();
 
     let fifaChatStarted = false;
-    let chatOpenLogged = false;
+    let chatLoadedLogged = false;
 
-    // Preloaded welcome message — shared by UI and DMP tracking on chat open
-    const HOME_WELCOME_MESSAGE =
-      "The world's biggest sporting event has one of the most complex IT operations ever. There are more than 10,000 devices deployed across 16 cities, and 3 countries. See how Lenovo, the Official Technology Partner of the FIFA World Cup 26™ is making it work.";
-
-    function trackChatOpen() {
-      if (chatOpenLogged || typeof sendDMPEvents !== "function") return;
-      chatOpenLogged = true;
-      ensureChatStart();
-      sendDMPEvents("ques", HOME_WELCOME_MESSAGE);
+    function trackChatLoaded() {
+      if (chatLoadedLogged || typeof sendDMPEvents !== "function") return;
+      chatLoadedLogged = true;
+      sendDMPEvents("chat-loaded");
     }
 
     function ensureChatStart() {
@@ -497,7 +492,7 @@
       state.step = 'home'; state.topic = null; state.card = null;
       addMessage('bot', silent
         ? 'Returning to main menu. What would you like to explore?'
-        : HOME_WELCOME_MESSAGE);
+        : "The world's biggest sporting event has one of the most complex IT operations ever. There are more than 10,000 devices deployed across 16 cities, and 3 countries. See how Lenovo, the Official Technology Partner of the FIFA World Cup 26™ is making it work.");
       setOptions([
         { label: 'Lenovo is supercharging people and teams with more productivity', action: () => handlePillarSelect('ee', 'Lenovo is supercharging people and teams with more productivity') },
         { label: 'AI is deployed at the FIFA World Cup 26™', action: () => handlePillarSelect('ai', 'AI is deployed at the FIFA World Cup 26™') },
@@ -580,7 +575,7 @@
     }
 
     showHome(false);
-    trackChatOpen();
+    trackChatLoaded();
   </script>
   
 </body>
